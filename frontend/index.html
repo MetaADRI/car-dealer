@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoElite | Premium Car Dealership</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS CSS for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1a56db;
+            --secondary-color: #0f2c6d;
+            --accent-color: #ff6b00;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 0.5rem;
+            color: var(--dark-color);
+            transition: color 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        /* User Info in Navbar */
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: rgba(26, 86, 219, 0.1);
+            border-radius: 30px;
+        }
+        
+        .user-info i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .user-info span {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.75rem 2rem;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Section Styles */
+        .section-padding {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 1rem auto;
+        }
+        
+        /* Car Cards */
+        .car-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            background: white;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .car-img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .car-card-body {
+            padding: 1.5rem;
+        }
+        
+        .car-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .car-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .car-features li {
+            margin-bottom: 0.5rem;
+            color: var(--gray-color);
+        }
+        
+        .car-features li i {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+        
+        /* Shopping Cart */
+        .cart-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        
+        .cart-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-img {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        /* Alert Styles */
+        .alert {
+            border-radius: 8px;
+            border: none;
+            padding: 1rem 1.5rem;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(rgba(15, 44, 109, 0.9), rgba(15, 44, 109, 0.9)), 
+                        url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-links h5 {
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 0.5rem;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Modal */
+        .modal-content {
+            border-radius: 12px;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: none;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-padding {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .user-info {
+                margin-top: 1rem;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AutoElite</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cars.html">Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create-account.html">Create Account</a>
+                    </li>
+                </ul>
+                <!-- User Info (will be shown if logged in) -->
+                <div class="user-info d-none" id="userInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="userName">User</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="1000">
+                <h1 class="hero-title">Find Your Dream Car Today</h1>
+                <p class="hero-subtitle">Discover our premium collection of luxury and performance vehicles with unbeatable deals and exceptional service.</p>
+                <a href="cars.html" class="btn btn-primary btn-lg">Browse Inventory</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section-padding stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6" data-aos="fade-up">
+                    <div class="stat-item">
+                        <div class="stat-number" id="statsYears">20+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-item">
+                        <div class="stat-number" id="statsVehicles">5,000+</div>
+                        <div class="stat-label">Vehicles Sold</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-item">
+                        <div class="stat-number" id="statsSatisfaction">98%</div>
+                        <div class="stat-label">Customer Satisfaction</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-item">
+                        <div class="stat-number" id="statsAvailable">50+</div>
+                        <div class="stat-label">Available Now</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Cars Section -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Featured Vehicles</h2>
+            
+            <!-- Alert for API errors -->
+            <div id="apiErrorAlert" class="alert alert-danger d-none mb-4" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <span id="apiErrorText"></span>
+            </div>
+            
+            <!-- Loading Spinner -->
+            <div class="loading-spinner d-none" id="loadingSpinner">
+                <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            
+            <div class="row" id="featuredCarsContainer">
+                <!-- Featured cars will be loaded dynamically from the API -->
+            </div>
+            
+            <!-- No Results Message -->
+            <div class="text-center d-none" id="noFeaturedCars">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No featured vehicles available</h4>
+                <p class="text-muted">Check back later for our latest premium vehicles.</p>
+            </div>
+            
+            <div class="text-center mt-4" data-aos="fade-up">
+                <a href="cars.html" class="btn btn-primary btn-lg">View All Vehicles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Section -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Your Shopping Cart</h2>
+            
+            <!-- Login Prompt for Cart -->
+            <div class="text-center d-none" id="cartLoginPrompt">
+                <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Please log in to view your cart</h4>
+                <p class="text-muted mb-4">Sign in to your account to save vehicles and manage your shopping cart.</p>
+                <a href="create-account.html" class="btn btn-primary">Create Account or Login</a>
+            </div>
+            
+            <div id="cart-items" data-aos="fade-up">
+                <!-- Cart items will be added here dynamically from the API -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h3 class="navbar-brand mb-3">AutoElite</h3>
+                    <p>Your trusted partner for premium vehicles. We provide exceptional service and the best deals on luxury and performance cars.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="cars.html">Cars</a></li>
+                            <li><a href="create-account.html">Create Account</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Services</h5>
+                        <ul>
+                            <li><a href="#">Car Sales</a></li>
+                            <li><a href="#">Financing</a></li>
+                            <li><a href="#">Trade-In</a></li>
+                            <li><a href="#">Maintenance</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Contact Us</h5>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> 123 Auto Street, City</li>
+                            <li><i class="fas fa-phone me-2"></i> (123) 456-7890</li>
+                            <li><i class="fas fa-envelope me-2"></i> info@autoelite.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <p>&copy; 2023 AutoElite. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Required Modal -->
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login Required</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-user-lock fa-3x text-primary mb-3"></i>
+                    <h4>Please Log In</h4>
+                    <p class="mb-4">You need to be logged in to add vehicles to your cart.</p>
+                    <a href="create-account.html" class="btn btn-primary">Create Account or Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Car Dealer Modal -->
+    <div class="modal fade" id="externalDealerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Special Offer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Looking for more options? Check out our partner's extensive inventory of vehicles!</p>
+                    <a href="https://www.beforward.jp" class="btn btn-primary mt-3" target="_blank">Browse BE FORWARD Inventory</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- AOS JS for scroll animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS for scroll animations
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // API Base URL - Change this to match your Flask server
+        const API_BASE_URL = 'http://localhost:5000/api';
+        
+        // Global variables
+        let featuredCars = [];
+        let cartItems = [];
+        let currentUser = null;
+        
+        // Shopping Cart Functionality
+        $(document).ready(function() {
+            // Check if user is logged in
+            checkAuthStatus();
+            
+            // Load featured cars from API
+            loadFeaturedCars();
+            
+            // Load cart if user is logged in
+            if (currentUser) {
+                loadCart();
+            }
+            
+            // Update stats with dynamic data
+            updateStats();
+            
+            // Add to cart functionality
+            $(document).on('click', '.add-to-cart', function() {
+                if (!currentUser) {
+                    $('#loginRequiredModal').modal('show');
+                    return;
+                }
+                
+                const carId = $(this).data('car-id');
+                const carCard = $(this).closest('.col-md-4');
+                
+                addToCart(carId, carCard);
+            });
+            
+            // Show external dealer modal after 60 seconds
+            setTimeout(function() {
+                $('#externalDealerModal').modal('show');
+            }, 60000);
+        });
+        
+        // Check if user is authenticated
+        function checkAuthStatus() {
+            const token = localStorage.getItem('authToken');
+            const userData = localStorage.getItem('user');
+            
+            if (token && userData) {
+                currentUser = JSON.parse(userData);
+                $('#userInfo').removeClass('d-none');
+                $('#userName').text(currentUser.firstName);
+                $('#cartLoginPrompt').addClass('d-none');
+            } else {
+                $('#cartLoginPrompt').removeClass('d-none');
+            }
+        }
+        
+        // Load featured cars from API
+        function loadFeaturedCars() {
+            $('#loadingSpinner').removeClass('d-none');
+            $('#featuredCarsContainer').addClass('d-none');
+            
+            $.ajax({
+                url: `${API_BASE_URL}/cars`,
+                method: 'GET',
+                success: function(response) {
+                    $('#loadingSpinner').addClass('d-none');
+                    $('#featuredCarsContainer').removeClass('d-none');
+                    
+                    // Take only the first 3 cars as featured
+                    featuredCars = response.cars.slice(0, 3);
+                    renderFeaturedCars(featuredCars);
+                },
+                error: function(xhr) {
+                    $('#loadingSpinner').addClass('d-none');
+                    
+                    let errorMessage = 'Failed to load featured vehicles. Please try again later.';
+                    
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                    
+                    showApiError(errorMessage);
+                }
+            });
+        }
+        
+        // Render featured cars in the UI
+        function renderFeaturedCars(cars) {
+            const featuredContainer = $('#featuredCarsContainer');
+            
+            if (cars.length === 0) {
+                $('#noFeaturedCars').removeClass('d-none');
+                featuredContainer.addClass('d-none');
+                return;
+            }
+            
+            $('#noFeaturedCars').addClass('d-none');
+            featuredContainer.removeClass('d-none');
+            
+            let carsHTML = '';
+            
+            cars.forEach((car, index) => {
+                // Check if car is in cart
+                const inCart = cartItems.some(item => item.id === car.id);
+                const cartButtonText = inCart ? 'Added to Cart' : 'Add to Cart';
+                const cartButtonClass = inCart ? 'btn-success' : 'btn-outline-primary';
+                const cartButtonDisabled = inCart ? 'disabled' : '';
+                
+                carsHTML += `
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="${index * 100}">
+                        <div class="car-card">
+                            <img src="${car.image_url}" class="car-img" alt="${car.make} ${car.model}">
+                            <div class="car-card-body">
+                                <h3 class="car-title">${car.make} ${car.model}</h3>
+                                <div class="car-price">$${car.price.toLocaleString()}</div>
+                                <ul class="car-features">
+                                    <li><i class="fas fa-tachometer-alt"></i> ${car.horsepower} HP</li>
+                                    <li><i class="fas fa-gas-pump"></i> ${getFuelEfficiency(car)}</li>
+                                    <li><i class="fas fa-cogs"></i> ${car.transmission}</li>
+                                    <li><i class="fas fa-user-friends"></i> ${car.seats} Seats</li>
+                                </ul>
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn ${cartButtonClass} add-to-cart" data-car-id="${car.id}" ${cartButtonDisabled}>${cartButtonText}</button>
+                                    <a href="cars.html" class="btn btn-primary">View Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            featuredContainer.html(carsHTML);
+        }
+        
+        // Load cart from API
+        function loadCart() {
+            if (!currentUser) return;
+            
+            $.ajax({
+                url: `${API_BASE_URL}/cart`,
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                },
+                success: function(response) {
+                    cartItems = response.cart;
+                    updateCartDisplay();
+                    renderFeaturedCars(featuredCars); // Re-render to update cart status
+                },
+                error: function(xhr) {
+                    // If unauthorized, clear user data
+                    if (xhr.status === 401) {
+                        localStorage.removeItem('authToken');
+                        localStorage.removeItem('user');
+                        currentUser = null;
+                        $('#userInfo').addClass('d-none');
+                        $('#cartLoginPrompt').removeClass('d-none');
+                    }
+                }
+            });
+        }
+        
+        // Add car to cart
+        function addToCart(carId, carCard) {
+            if (!currentUser) return;
+            
+            $.ajax({
+                url: `${API_BASE_URL}/cart/add/${carId}`,
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                },
+                success: function(response) {
+                    // Update cart display
+                    loadCart();
+                    
+                    // Update the button in the car card
+                    const button = carCard.find('.add-to-cart');
+                    button.removeClass('btn-outline-primary').addClass('btn-success').text('Added to Cart').prop('disabled', true);
+                    
+                    // Show success message
+                    alert('Vehicle added to cart successfully!');
+                },
+                error: function(xhr) {
+                    let errorMessage = 'Failed to add vehicle to cart. Please try again.';
+                    
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                    
+                    alert(errorMessage);
+                }
+            });
+        }
+        
+        // Remove car from cart
+        function removeFromCart(carId) {
+            if (!currentUser) return;
+            
+            $.ajax({
+                url: `${API_BASE_URL}/cart/remove/${carId}`,
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                },
+                success: function(response) {
+                    // Update cart display
+                    loadCart();
+                    
+                    // Update the button in the car card
+                    $(`.add-to-cart[data-car-id="${carId}"]`).removeClass('btn-success').addClass('btn-outline-primary').text('Add to Cart').prop('disabled', false);
+                },
+                error: function(xhr) {
+                    let errorMessage = 'Failed to remove vehicle from cart. Please try again.';
+                    
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                    
+                    alert(errorMessage);
+                }
+            });
+        }
+        
+        // Update cart display
+        function updateCartDisplay() {
+            const cartItemsContainer = $('#cart-items');
+            
+            if (!currentUser) {
+                $('#cartLoginPrompt').removeClass('d-none');
+                cartItemsContainer.html('');
+                return;
+            }
+            
+            $('#cartLoginPrompt').addClass('d-none');
+            
+            if (cartItems.length === 0) {
+                cartItemsContainer.html('<p class="text-center text-muted">Your cart is empty. Add some vehicles to get started!</p>');
+                return;
+            }
+            
+            let cartHTML = '';
+            
+            cartItems.forEach((item) => {
+                cartHTML += `
+                    <div class="cart-item d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <img src="${item.image_url}" class="cart-img" alt="${item.make} ${item.model}">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="mb-1">${item.make} ${item.model}</h5>
+                            <p class="mb-0 text-muted">${item.year} • ${item.type}</p>
+                            <p class="mb-0 text-primary fw-bold">$${item.price.toLocaleString()}</p>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button class="btn btn-outline-danger btn-sm remove-from-cart" data-car-id="${item.id}">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartHTML += `
+                <div class="text-center mt-4">
+                    <a href="cars.html" class="btn btn-primary btn-lg">Continue Shopping</a>
+                </div>
+            `;
+            
+            cartItemsContainer.html(cartHTML);
+            
+            // Add remove functionality
+            $('.remove-from-cart').on('click', function() {
+                const carId = $(this).data('car-id');
+                removeFromCart(carId);
+            });
+        }
+        
+        // Update stats with dynamic data
+        function updateStats() {
+            // In a real application, these would come from the API
+            // For now, we'll use static values or calculate from car data
+            
+            $.ajax({
+                url: `${API_BASE_URL}/cars`,
+                method: 'GET',
+                success: function(response) {
+                    const totalCars = response.cars.length;
+                    
+                    // Update available cars count
+                    $('#statsAvailable').text(`${totalCars}+`);
+                    
+                    // Animate the stats counting
+                    animateValue('statsYears', 0, 20, 2000);
+                    animateValue('statsVehicles', 0, 5000, 2500);
+                    animateValue('statsSatisfaction', 0, 98, 1500);
+                },
+                error: function() {
+                    // Fallback to static values if API fails
+                    animateValue('statsYears', 0, 20, 2000);
+                    animateValue('statsVehicles', 0, 5000, 2500);
+                    animateValue('statsSatisfaction', 0, 98, 1500);
+                    animateValue('statsAvailable', 0, 50, 2000);
+                }
+            });
+        }
+        
+        // Utility functions
+        function getFuelEfficiency(car) {
+            if (car.fuel_type === 'Electric') {
+                return `${car.mileage || '396'} Miles Range`;
+            }
+            return '15/21 MPG'; // Default for demo
+        }
+        
+        function showApiError(message) {
+            $('#apiErrorText').text(message);
+            $('#apiErrorAlert').removeClass('d-none');
+        }
+        
+        // Animate counting numbers
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                obj.innerHTML = value + (id === 'statsSatisfaction' ? '%' : '+');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+    </script>
+</body>
+</html>

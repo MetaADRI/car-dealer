@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | AutoElite Premium Car Dealership</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS CSS for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1a56db;
+            --secondary-color: #0f2c6d;
+            --accent-color: #ff6b00;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            overflow-x: hidden;
+            background-color: #f5f7fa;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 0.5rem;
+            color: var(--dark-color);
+            transition: color 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .account-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 10rem 0 6rem;
+            text-align: center;
+        }
+        
+        .account-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .account-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Section Styles */
+        .section-padding {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 1rem auto;
+        }
+        
+        /* Form Styles */
+        .form-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+        
+        .form-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(26, 86, 219, 0.25);
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.75rem 2rem;
+            font-weight: 500;
+            border-radius: 30px;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary:disabled {
+            background-color: #6c757d;
+            border-color: #6c757d;
+            transform: none;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+        
+        /* Form Steps */
+        .form-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .form-steps:before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #e9ecef;
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-number {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .step.active .step-number {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .step.completed .step-number {
+            background-color: var(--accent-color);
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.9rem;
+            color: var(--gray-color);
+            font-weight: 500;
+        }
+        
+        .step.active .step-label {
+            color: var(--primary-color);
+        }
+        
+        /* Form Sections */
+        .form-section {
+            display: none;
+        }
+        
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            background-color: var(--light-color);
+        }
+        
+        .benefit-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(26, 86, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+        
+        /* Alert Styles */
+        .alert {
+            border-radius: 8px;
+            border: none;
+            padding: 1rem 1.5rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-links h5 {
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 0.5rem;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .account-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-padding {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .form-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AutoElite</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cars.html">Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="create-account.html">Create Account</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="account-hero">
+        <div class="container">
+            <h1 data-aos="fade-up">Join AutoElite</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Create your account to access exclusive deals, save your favorite vehicles, and streamline your car buying experience.</p>
+        </div>
+    </section>
+
+    <!-- Account Form Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="form-container" data-aos="fade-up">
+                <h2 class="form-title">Create Your Account</h2>
+                
+                <!-- Alert for API errors -->
+                <div id="apiErrorAlert" class="alert alert-danger d-none" role="alert">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <span id="apiErrorText"></span>
+                </div>
+                
+                <!-- Form Steps -->
+                <div class="form-steps">
+                    <div class="step active" id="step1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Personal Info</div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Account Details</div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Preferences</div>
+                    </div>
+                </div>
+                
+                <!-- Personal Information Section -->
+                <div class="form-section active" id="personalInfo">
+                    <h3 class="mb-4">Personal Information</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control required" id="firstName" placeholder="Enter your first name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control required" id="lastName" placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control required" id="email" placeholder="Enter your email">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control required" id="phone" placeholder="Enter your phone number">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="dob" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="dob">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="address" placeholder="Enter your address">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <div></div> <!-- Empty div for spacing -->
+                        <button class="btn btn-primary next-step" data-next="accountDetails">Next Step</button>
+                    </div>
+                </div>
+                
+                <!-- Account Details Section -->
+                <div class="form-section" id="accountDetails">
+                    <h3 class="mb-4">Account Details</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control required" id="username" placeholder="Choose a username">
+                            <div class="form-text">Username must be 4-20 characters long</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control required" id="password" placeholder="Create a password">
+                            <div class="form-text">Password must be at least 8 characters</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="confirmPassword" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control required" id="confirmPassword" placeholder="Confirm your password">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="securityQuestion" class="form-label">Security Question <span class="text-danger">*</span></label>
+                            <select class="form-control required" id="securityQuestion">
+                                <option value="">Select a security question</option>
+                                <option value="motherMaidenName">What is your mother's maiden name?</option>
+                                <option value="petName">What was the name of your first pet?</option>
+                                <option value="birthCity">In what city were you born?</option>
+                                <option value="highSchool">What high school did you attend?</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="securityAnswer" class="form-label">Security Answer <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control required" id="securityAnswer" placeholder="Enter your security answer">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-outline-primary prev-step" data-prev="personalInfo">Previous</button>
+                        <button class="btn btn-primary next-step" data-next="preferences">Next Step</button>
+                    </div>
+                </div>
+                
+                <!-- Preferences Section -->
+                <div class="form-section" id="preferences">
+                    <h3 class="mb-4">Your Preferences</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Vehicle Types You're Interested In</label>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input preference-checkbox" type="checkbox" id="sedan" value="sedan">
+                                <label class="form-check-label" for="sedan">Sedan</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input preference-checkbox" type="checkbox" id="suv" value="suv">
+                                <label class="form-check-label" for="suv">SUV</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input preference-checkbox" type="checkbox" id="coupe" value="coupe">
+                                <label class="form-check-label" for="coupe">Coupe</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input preference-checkbox" type="checkbox" id="convertible" value="convertible">
+                                <label class="form-check-label" for="convertible">Convertible</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Budget Range</label>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input budget-radio" type="radio" name="budget" id="budget1" value="0-50000">
+                                <label class="form-check-label" for="budget1">Under $50,000</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input budget-radio" type="radio" name="budget" id="budget2" value="50000-100000">
+                                <label class="form-check-label" for="budget2">$50,000 - $100,000</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input budget-radio" type="radio" name="budget" id="budget3" value="100000-150000">
+                                <label class="form-check-label" for="budget3">$100,000 - $150,000</label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input budget-radio" type="radio" name="budget" id="budget4" value="150000+">
+                                <label class="form-check-label" for="budget4">Over $150,000</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <label for="newsletter" class="form-label">How did you hear about us?</label>
+                            <select class="form-control" id="newsletter">
+                                <option value="">Select an option</option>
+                                <option value="search">Search Engine</option>
+                                <option value="social">Social Media</option>
+                                <option value="friend">Friend/Family</option>
+                                <option value="ad">Advertisement</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-check mt-4">
+                        <input class="form-check-input required" type="checkbox" id="terms">
+                        <label class="form-check-label" for="terms">
+                            I agree to the <a href="#" class="text-primary">Terms of Service</a> and <a href="#" class="text-primary">Privacy Policy</a> <span class="text-danger">*</span>
+                        </label>
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <button class="btn btn-outline-primary prev-step" data-prev="accountDetails">Previous</button>
+                        <button class="btn btn-primary" id="submitBtn" disabled>Create Account</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="section-padding benefits-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Benefits of Creating an Account</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Save Favorites</h4>
+                        <p>Save your favorite vehicles and easily compare them later. Create personalized lists for different needs.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h4>Price Alerts</h4>
+                        <p>Get notified when vehicles you're interested in have price drops or new similar models arrive.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <h4>Exclusive Deals</h4>
+                        <p>Access members-only promotions, special financing rates, and early access to new inventory.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h3 class="navbar-brand mb-3">AutoElite</h3>
+                    <p>Your trusted partner for premium vehicles. We provide exceptional service and the best deals on luxury and performance cars.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="cars.html">Cars</a></li>
+                            <li><a href="create-account.html">Create Account</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Services</h5>
+                        <ul>
+                            <li><a href="#">Car Sales</a></li>
+                            <li><a href="#">Financing</a></li>
+                            <li><a href="#">Trade-In</a></li>
+                            <li><a href="#">Maintenance</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Contact Us</h5>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> 123 Auto Street, City</li>
+                            <li><i class="fas fa-phone me-2"></i> (123) 456-7890</li>
+                            <li><i class="fas fa-envelope me-2"></i> info@autoelite.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <p>&copy; 2023 AutoElite. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Account Created Successfully!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                    </div>
+                    <h4>Welcome to AutoElite!</h4>
+                    <p class="mb-4">Your account has been created successfully. You can now log in and start exploring our premium vehicle collection.</p>
+                    <a href="index.html" class="btn btn-primary">Continue to Homepage</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <h5>Creating Your Account...</h5>
+                    <p class="mb-0">Please wait while we set up your account.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Car Dealer Modal -->
+    <div class="modal fade" id="externalDealerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Special Offer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Looking for more options? Check out our partner's extensive inventory of vehicles!</p>
+                    <a href="https://www.beforward.jp" class="btn btn-primary mt-3" target="_blank">Browse BE FORWARD Inventory</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- AOS JS for scroll animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS for scroll animations
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // API Base URL - Change this to match your Flask server
+        const API_BASE_URL = 'http://localhost:5000/api';
+        
+        // Form functionality
+        $(document).ready(function() {
+            let currentStep = 1;
+            
+            // Next step button functionality
+            $('.next-step').on('click', function() {
+                const nextSection = $(this).data('next');
+                
+                // Validate current section before proceeding
+                if (validateSection(currentStep)) {
+                    // Hide current section
+                    $('.form-section.active').removeClass('active');
+                    
+                    // Show next section
+                    $(`#${nextSection}`).addClass('active');
+                    
+                    // Update steps
+                    $(`#step${currentStep}`).removeClass('active').addClass('completed');
+                    currentStep++;
+                    $(`#step${currentStep}`).addClass('active');
+                } else {
+                    alert('Please fill in all required fields before proceeding.');
+                }
+            });
+            
+            // Previous step button functionality
+            $('.prev-step').on('click', function() {
+                const prevSection = $(this).data('prev');
+                
+                // Hide current section
+                $('.form-section.active').removeClass('active');
+                
+                // Show previous section
+                $(`#${prevSection}`).addClass('active');
+                
+                // Update steps
+                $(`#step${currentStep}`).removeClass('active');
+                currentStep--;
+                $(`#step${currentStep}`).removeClass('completed').addClass('active');
+            });
+            
+            // Form validation for each section
+            function validateSection(step) {
+                let isValid = true;
+                
+                if (step === 1) {
+                    $('#personalInfo .required').each(function() {
+                        if ($(this).val() === '') {
+                            isValid = false;
+                            $(this).addClass('is-invalid');
+                        } else {
+                            $(this).removeClass('is-invalid');
+                        }
+                    });
+                } else if (step === 2) {
+                    $('#accountDetails .required').each(function() {
+                        if ($(this).val() === '') {
+                            isValid = false;
+                            $(this).addClass('is-invalid');
+                        } else {
+                            $(this).removeClass('is-invalid');
+                        }
+                    });
+                    
+                    // Additional password validation
+                    const password = $('#password').val();
+                    const confirmPassword = $('#confirmPassword').val();
+                    
+                    if (password !== confirmPassword) {
+                        isValid = false;
+                        $('#confirmPassword').addClass('is-invalid');
+                        alert('Passwords do not match!');
+                    } else {
+                        $('#confirmPassword').removeClass('is-invalid');
+                    }
+                    
+                    if (password.length < 8) {
+                        isValid = false;
+                        $('#password').addClass('is-invalid');
+                        alert('Password must be at least 8 characters long!');
+                    } else {
+                        $('#password').removeClass('is-invalid');
+                    }
+                }
+                
+                return isValid;
+            }
+            
+            // Form submission
+            $('#submitBtn').on('click', function() {
+                if (validateSection(3)) {
+                    // Check if terms are accepted
+                    if (!$('#terms').is(':checked')) {
+                        alert('You must accept the Terms of Service and Privacy Policy to create an account.');
+                        return;
+                    }
+                    
+                    // Collect preferences
+                    const preferences = {
+                        vehicleTypes: [],
+                        budget: '',
+                        referralSource: $('#newsletter').val()
+                    };
+                    
+                    // Get selected vehicle types
+                    $('.preference-checkbox:checked').each(function() {
+                        preferences.vehicleTypes.push($(this).val());
+                    });
+                    
+                    // Get selected budget
+                    $('.budget-radio:checked').each(function() {
+                        preferences.budget = $(this).val();
+                    });
+                    
+                    // Show loading modal
+                    $('#loadingModal').modal('show');
+                    
+                    // Prepare data for API
+                    const formData = {
+                        username: $('#username').val(),
+                        email: $('#email').val(),
+                        password: $('#password').val(),
+                        firstName: $('#firstName').val(),
+                        lastName: $('#lastName').val(),
+                        phone: $('#phone').val(),
+                        address: $('#address').val(),
+                        dob: $('#dob').val(),
+                        securityQuestion: $('#securityQuestion').val(),
+                        securityAnswer: $('#securityAnswer').val(),
+                        preferences: JSON.stringify(preferences)
+                    };
+                    
+                    // Send data to backend API
+                    $.ajax({
+                        url: `${API_BASE_URL}/auth/register`,
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: function(response) {
+                            $('#loadingModal').modal('hide');
+                            
+                            // Store token in localStorage for future API calls
+                            if (response.token) {
+                                localStorage.setItem('authToken', response.token);
+                                localStorage.setItem('user', JSON.stringify(response.user));
+                            }
+                            
+                            // Show success modal
+                            $('#successModal').modal('show');
+                        },
+                        error: function(xhr) {
+                            $('#loadingModal').modal('hide');
+                            
+                            let errorMessage = 'An error occurred while creating your account.';
+                            
+                            if (xhr.responseJSON && xhr.responseJSON.error) {
+                                errorMessage = xhr.responseJSON.error;
+                            }
+                            
+                            // Show error alert
+                            $('#apiErrorText').text(errorMessage);
+                            $('#apiErrorAlert').removeClass('d-none');
+                            
+                            // Scroll to top to show error
+                            $('html, body').animate({
+                                scrollTop: $('.form-container').offset().top - 100
+                            }, 500);
+                        }
+                    });
+                } else {
+                    alert('Please fill in all required fields before submitting.');
+                }
+            });
+            
+            // Disable submit button until all required fields are filled
+            function checkFormCompletion() {
+                let allFilled = true;
+                
+                $('.required').each(function() {
+                    if ($(this).is(':checkbox')) {
+                        if (!$(this).is(':checked')) {
+                            allFilled = false;
+                            return false; // Break the loop
+                        }
+                    } else {
+                        if ($(this).val() === '') {
+                            allFilled = false;
+                            return false; // Break the loop
+                        }
+                    }
+                });
+                
+                $('#submitBtn').prop('disabled', !allFilled);
+            }
+            
+            // Check form completion on input
+            $('.required').on('input change', function() {
+                checkFormCompletion();
+            });
+            
+            // Password strength indicator (optional enhancement)
+            $('#password').on('input', function() {
+                const password = $(this).val();
+                let strength = 0;
+                
+                if (password.length >= 8) strength++;
+                if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+                if (password.match(/\d/)) strength++;
+                if (password.match(/[^a-zA-Z\d]/)) strength++;
+                
+                // You could add a visual strength indicator here
+            });
+            
+            // Show external dealer modal after 60 seconds
+            setTimeout(function() {
+                $('#externalDealerModal').modal('show');
+            }, 60000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars Inventory | AutoElite Premium Car Dealership</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS CSS for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1a56db;
+            --secondary-color: #0f2c6d;
+            --accent-color: #ff6b00;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-color);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            margin: 0 0.5rem;
+            color: var(--dark-color);
+            transition: color 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-color);
+        }
+        
+        /* User Info in Navbar */
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: rgba(26, 86, 219, 0.1);
+            border-radius: 30px;
+        }
+        
+        .user-info i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .user-info span {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section */
+        .cars-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 10rem 0 6rem;
+            text-align: center;
+        }
+        
+        .cars-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cars-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Section Styles */
+        .section-padding {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 1rem auto;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            background-color: var(--light-color);
+            padding: 2rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .filter-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        /* Car Cards */
+        .car-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            margin-bottom: 2rem;
+            background: white;
+        }
+        
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .car-img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .car-card:hover .car-img {
+            transform: scale(1.05);
+        }
+        
+        .car-card-body {
+            padding: 1.5rem;
+        }
+        
+        .car-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .car-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .car-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .car-features li {
+            margin-bottom: 0.5rem;
+            color: var(--gray-color);
+        }
+        
+        .car-features li i {
+            color: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+        
+        .car-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Shopping Cart */
+        .cart-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+        
+        .cart-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cart-img {
+            width: 120px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        /* Alert Styles */
+        .alert {
+            border-radius: 8px;
+            border: none;
+            padding: 1rem 1.5rem;
+        }
+        
+        /* Modal */
+        .modal-content {
+            border-radius: 12px;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: none;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        /* Loading Spinner */
+        .loading-spinner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-links h5 {
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            color: white;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            margin-right: 0.5rem;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .cars-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-padding {
+                padding: 3rem 0;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .user-info {
+                margin-top: 1rem;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">AutoElite</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cars.html">Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create-account.html">Create Account</a>
+                    </li>
+                </ul>
+                <!-- User Info (will be shown if logged in) -->
+                <div class="user-info d-none" id="userInfo">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="userName">User</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="cars-hero">
+        <div class="container">
+            <h1 data-aos="fade-up">Premium Vehicle Collection</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Discover our exclusive selection of luxury and performance vehicles, meticulously curated for the discerning driver.</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-card" data-aos="fade-up">
+                <h3 class="filter-title">Filter Vehicles</h3>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Brand</label>
+                        <select class="form-select" id="brandFilter">
+                            <option value="all">All Brands</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="Audi">Audi</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="Tesla">Tesla</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Type</label>
+                        <select class="form-select" id="typeFilter">
+                            <option value="all">All Types</option>
+                            <option value="Sedan">Sedan</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Coupe">Coupe</option>
+                            <option value="Convertible">Convertible</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Price Range</label>
+                        <select class="form-select" id="priceFilter">
+                            <option value="all">Any Price</option>
+                            <option value="0-50000">Up to $50,000</option>
+                            <option value="50000-100000">$50,000 - $100,000</option>
+                            <option value="100000-150000">$100,000 - $150,000</option>
+                            <option value="150000+">Over $150,000</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">Year</label>
+                        <select class="form-select" id="yearFilter">
+                            <option value="all">Any Year</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button class="btn btn-outline-primary" id="resetFilters">Reset Filters</button>
+                    <button class="btn btn-primary" id="applyFilters">Apply Filters</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cars Inventory Section -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Available Vehicles</h2>
+            
+            <!-- Alert for API errors -->
+            <div id="apiErrorAlert" class="alert alert-danger d-none mb-4" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>
+                <span id="apiErrorText"></span>
+            </div>
+            
+            <!-- Loading Spinner -->
+            <div class="loading-spinner d-none" id="loadingSpinner">
+                <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+            
+            <div class="row" id="carsContainer">
+                <!-- Cars will be loaded dynamically from the API -->
+            </div>
+            
+            <!-- No Results Message -->
+            <div class="text-center d-none" id="noResults">
+                <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No vehicles found</h4>
+                <p class="text-muted">Try adjusting your filters to see more results.</p>
+            </div>
+            
+            <!-- Load More Button -->
+            <div class="text-center mt-4" data-aos="fade-up">
+                <button class="btn btn-outline-primary btn-lg" id="loadMore">Load More Vehicles</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shopping Cart Section -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Your Shopping Cart</h2>
+            
+            <!-- Login Prompt for Cart -->
+            <div class="text-center d-none" id="cartLoginPrompt">
+                <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Please log in to view your cart</h4>
+                <p class="text-muted mb-4">Sign in to your account to save vehicles and manage your shopping cart.</p>
+                <a href="create-account.html" class="btn btn-primary">Create Account or Login</a>
+            </div>
+            
+            <div id="cart-items" data-aos="fade-up">
+                <!-- Cart items will be added here dynamically from the API -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h3 class="navbar-brand mb-3">AutoElite</h3>
+                    <p>Your trusted partner for premium vehicles. We provide exceptional service and the best deals on luxury and performance cars.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Quick Links</h5>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="cars.html">Cars</a></li>
+                            <li><a href="create-account.html">Create Account</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Services</h5>
+                        <ul>
+                            <li><a href="#">Car Sales</a></li>
+                            <li><a href="#">Financing</a></li>
+                            <li><a href="#">Trade-In</a></li>
+                            <li><a href="#">Maintenance</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h5>Contact Us</h5>
+                        <ul>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> 123 Auto Street, City</li>
+                            <li><i class="fas fa-phone me-2"></i> (123) 456-7890</li>
+                            <li><i class="fas fa-envelope me-2"></i> info@autoelite.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="text-center">
+                <p>&copy; 2023 AutoElite. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Car Details Modal -->
+    <div class="modal fade" id="carModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="carModalTitle">Car Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="carModalBody">
+                    <!-- Car details will be loaded here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Required Modal -->
+    <div class="modal fade" id="loginRequiredModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login Required</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-user-lock fa-3x text-primary mb-3"></i>
+                    <h4>Please Log In</h4>
+                    <p class="mb-4">You need to be logged in to add vehicles to your cart.</p>
+                    <a href="create-account.html" class="btn btn-primary">Create Account or Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Car Dealer Modal -->
+    <div class="modal fade" id="externalDealerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Special Offer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Looking for more options? Check out our partner's extensive inventory of vehicles!</p>
+                    <a href="https://www.beforward.jp" class="btn btn-primary mt-3" target="_blank">Browse BE FORWARD Inventory</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- AOS JS for scroll animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS for scroll animations
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // API Base URL - Change this to match your Flask server
+        const API_BASE_URL = 'http://localhost:5000/api';
+        
+        // Global variables
+        let allCars = [];
+        let filteredCars = [];
+        let cartItems = [];
+        let currentUser = null;
+        
+        // Shopping Cart Functionality
+        $(document).ready(function() {
+            // Check if user is logged in
+            checkAuthStatus();
+            
+            // Load cars from API
+            loadCars();
+            
+            // Load cart if user is logged in
+            if (currentUser) {
+                loadCart();
+            }
+            
+            // Add to cart functionality
+            $(document).on('click', '.add-to-cart', function() {
+                if (!currentUser) {
+                    $('#loginRequiredModal').modal('show');
+                    return;
+                }
+                
+                const carId = $(this).data('car-id');
+                const carCard = $(this).closest('.col-md-4');
+                
+                addToCart(carId, carCard);
+            });
+            
+            // Filter functionality
+            $('#applyFilters').on('click', function() {
+                applyFilters();
+            });
+            
+            // Reset filters
+            $('#resetFilters').on('click', function() {
+                $('#brandFilter, #typeFilter, #priceFilter, #yearFilter').val('all');
+                applyFilters();
+            });
+            
+            // Load more vehicles
+            $('#loadMore').on('click', function() {
+                // In a real application, this would load more vehicles from a server
+                // For this demo, we'll just show an alert
+                alert('Loading more vehicles... This would fetch additional cars from the server in a real application.');
+            });
+            
+            // Car details modal
+            $(document).on('click', '.view-details', function() {
+                const carId = $(this).data('car-id');
+                showCarDetails(carId);
+            });
+            
+            // Show external dealer modal after 60 seconds
+            setTimeout(function() {
+                $('#externalDealerModal').modal('show');
+            }, 60000);
+        });
+        
+        // Check if user is authenticated
+        function checkAuthStatus() {
+            const token = localStorage.getItem('authToken');
+            const userData = localStorage.getItem('user');
+            
+            if (token && userData) {
+                currentUser = JSON.parse(userData);
+                $('#userInfo').removeClass('d-none');
+                $('#userName').text(currentUser.firstName);
+                $('#cartLoginPrompt').addClass('d-none');
+            } else {
+                $('#cartLoginPrompt').removeClass('d-none');
+            }
+        }
+        
+        // Load cars from API
+        function loadCars() {
+            $('#loadingSpinner').removeClass('d-none');
+            $('#carsContainer').addClass('d-none');
+            
+            $.ajax({
+                url: `${API_BASE_URL}/cars`,
+                method: 'GET',
+                success: function(response) {
+                    $('#loadingSpinner').addClass('d-none');
+                    $('#carsContainer').removeClass('d-none');
+                    
+                    allCars = response.cars;
+                    filteredCars = [...allCars];
+                    renderCars(allCars);
+                },
+                error: function(xhr) {
+                    $('#loadingSpinner').addClass('d-none');
+                    
+                    let errorMessage = 'Failed to load vehicles. Please try again later.';
+                    
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                    
+                    showApiError(errorMessage);
+                }
+            });
+        }
+        
+        // Render cars in the UI
+        function renderCars(cars) {
+            const carsContainer = $('#carsContainer');
+            
+            if (cars.length === 0) {
+                $('#noResults').removeClass('d-none');
+                carsContainer.addClass('d-none');
+                return;
+            }
+            
+            $('#noResults').addClass('d-none');
+            carsContainer.removeClass('d-none');
+            
+            let carsHTML = '';
+            
+            cars.forEach((car, index) => {
+                // Check if car is in cart
+                const inCart = cartItems.some(item => item.id === car.id);
+                const cartButtonText = inCart ? 'Added to Cart' : 'Add to Cart';
+                const cartButtonClass = inCart ? 'btn-success' : 'btn-outline-primary';
+                const cartButtonDisabled = inCart ? 'disabled' : '';
+                
+                carsHTML += `
+                    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}" data-brand="${car.make}" data-type="${car.type}" data-price="${car.price}" data-year="${car.year}">
+                        <div class="car-card">
+                            <div class="position-relative">
+                                <img src="${car.image_url}" class="car-img" alt="${car.make} ${car.model}">
+                                <span class="car-badge">${getCarBadge(car)}</span>
+                            </div>
+                            <div class="car-card-body">
+                                <h3 class="car-title">${car.make} ${car.model}</h3>
+                                <div class="car-price">$${car.price.toLocaleString()}</div>
+                                <ul class="car-features">
+                                    <li><i class="fas fa-tachometer-alt"></i> ${car.horsepower} HP</li>
+                                    <li><i class="fas fa-gas-pump"></i> ${getFuelEfficiency(car)}</li>
+                                    <li><i class="fas fa-cogs"></i> ${car.transmission}</li>
+                                    <li><i class="fas fa-user-friends"></i> ${car.seats} Seats</li>
+                                </ul>
+                                <div class="d-flex justify-content-between">
+                                    <button class="btn ${cartButtonClass} add-to-cart" data-car-id="${car.id}" ${cartButtonDisabled}>${cartButtonText}</button>
+                                    <button class="btn btn-primary view-details" data-car-id="${car.id}">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            carsContainer.html(carsHTML);
+        }
+        
+        // Apply filters to cars
+        function applyFilters() {
+            const brand = $('#brandFilter').val();
+            const type = $('#typeFilter').val();
+            const price = $('#priceFilter').val();
+            const year = $('#yearFilter').val();
+            
+            filteredCars = allCars.filter(car => {
+                let showCar = true;
+                
+                if (brand !== 'all' && car.make !== brand) {
+                    showCar = false;
+                }
+                
+                if (type !== 'all' && car.type !== type) {
+                    showCar = false;
+                }
+                
+                if (price !== 'all') {
+                    if (price === '0-50000' && car.price > 50000) {
+                        showCar = false;
+                    } else if (price === '50000-100000' && (car.price <= 50000 || car.price > 100000)) {
+                        showCar = false;
+                    } else if (price === '100000-150000' && (car.price <= 100000 || car.price > 150000)) {
+                        showCar = false;
+                    } else if (price === '150000+' && car.price <= 150000) {
+                        showCar = false;
+                    }
+                }
+                
+                if (year !== 'all' && car.year != year) {
+                    showCar = false;
+                }
+                
+                return showCar;
+            });
+            
+            renderCars(filteredCars);
+        }
+        
+        // Load cart from API
+        function loadCart() {
+            if (!currentUser) return;
+            
+            $.ajax({
+                url: `${API_BASE_URL}/cart`,
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                },
+                success: function(response) {
+                    cartItems = response.cart;
+                    updateCartDisplay();
+                    renderCars(filteredCars); // Re-render to update cart status
+                },
+                error: function(xhr) {
+                    // If unauthorized, clear user data
+                    if (xhr.status === 401) {
+                        localStorage.removeItem('authToken');
+                        localStorage.removeItem('user');
+                        currentUser = null;
+                        $('#userInfo').addClass('d-none');
+                        $('#cartLoginPrompt').removeClass('d-none');
+                    }
+                }
+            });
+        }
+        
+        // Add car to cart
+        function addToCart(carId, carCard) {
+            if (!currentUser) return;
+            
+            $.ajax({
+                url: `${API_BASE_URL}/cart/add/${carId}`,
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                },
+                success: function(response) {
+                    // Update cart display
+                    loadCart();
+                    
+                    // Update the button in the car card
+                    const button = carCard.find('.add-to-cart');
+                    button.removeClass('btn-outline-primary').addClass('btn-success').text('Added to Cart').prop('disabled', true);
+                    
+                    // Show success message
+                    alert('Vehicle added to cart successfully!');
+                },
+                error: function(xhr) {
+                    let errorMessage = 'Failed to add vehicle to cart. Please try again.';
+                    
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                    
+                    alert(errorMessage);
+                }
+            });
+        }
+        
+        // Remove car from cart
+        function removeFromCart(carId) {
+            if (!currentUser) return;
+            
+            $.ajax({
+                url: `${API_BASE_URL}/cart/remove/${carId}`,
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('authToken')}`
+                },
+                success: function(response) {
+                    // Update cart display
+                    loadCart();
+                    
+                    // Update the button in the car card
+                    $(`.add-to-cart[data-car-id="${carId}"]`).removeClass('btn-success').addClass('btn-outline-primary').text('Add to Cart').prop('disabled', false);
+                },
+                error: function(xhr) {
+                    let errorMessage = 'Failed to remove vehicle from cart. Please try again.';
+                    
+                    if (xhr.responseJSON && xhr.responseJSON.error) {
+                        errorMessage = xhr.responseJSON.error;
+                    }
+                    
+                    alert(errorMessage);
+                }
+            });
+        }
+        
+        // Update cart display
+        function updateCartDisplay() {
+            const cartItemsContainer = $('#cart-items');
+            
+            if (!currentUser) {
+                $('#cartLoginPrompt').removeClass('d-none');
+                cartItemsContainer.html('');
+                return;
+            }
+            
+            $('#cartLoginPrompt').addClass('d-none');
+            
+            if (cartItems.length === 0) {
+                cartItemsContainer.html('<p class="text-center text-muted">Your cart is empty. Add some vehicles to get started!</p>');
+                return;
+            }
+            
+            let cartHTML = '';
+            
+            cartItems.forEach((item) => {
+                cartHTML += `
+                    <div class="cart-item d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <img src="${item.image_url}" class="cart-img" alt="${item.make} ${item.model}">
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h5 class="mb-1">${item.make} ${item.model}</h5>
+                            <p class="mb-0 text-muted">${item.year} • ${item.type}</p>
+                            <p class="mb-0 text-primary fw-bold">$${item.price.toLocaleString()}</p>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button class="btn btn-outline-danger btn-sm remove-from-cart" data-car-id="${item.id}">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartHTML += `
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary btn-lg">Proceed to Checkout</button>
+                </div>
+            `;
+            
+            cartItemsContainer.html(cartHTML);
+            
+            // Add remove functionality
+            $('.remove-from-cart').on('click', function() {
+                const carId = $(this).data('car-id');
+                removeFromCart(carId);
+            });
+        }
+        
+        // Show car details in modal
+        function showCarDetails(carId) {
+            const car = allCars.find(c => c.id == carId);
+            
+            if (!car) {
+                alert('Car details not found.');
+                return;
+            }
+            
+            const carDetails = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="${car.image_url}" class="img-fluid rounded" alt="${car.make} ${car.model}">
+                    </div>
+                    <div class="col-md-6">
+                        <h4>${car.make} ${car.model}</h4>
+                        <p class="text-primary h3">$${car.price.toLocaleString()}</p>
+                        <p>${getCarDescription(car)}</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Year:</strong> ${car.year}</li>
+                            <li><strong>Type:</strong> ${car.type}</li>
+                            <li><strong>Horsepower:</strong> ${car.horsepower} HP</li>
+                            <li><strong>Transmission:</strong> ${car.transmission}</li>
+                            <li><strong>Fuel Type:</strong> ${car.fuel_type}</li>
+                            <li><strong>Seats:</strong> ${car.seats}</li>
+                        </ul>
+                        <div class="mt-4">
+                            <button class="btn btn-primary add-to-cart-from-modal" data-car-id="${car.id}">Add to Cart</button>
+                            <button class="btn btn-outline-primary ms-2" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            $('#carModalTitle').text(`${car.make} ${car.model}`);
+            $('#carModalBody').html(carDetails);
+            $('#carModal').modal('show');
+            
+            // Add to cart from modal
+            $('.add-to-cart-from-modal').on('click', function() {
+                const carId = $(this).data('car-id');
+                $('#carModal').modal('hide');
+                
+                if (!currentUser) {
+                    $('#loginRequiredModal').modal('show');
+                    return;
+                }
+                
+                // Find the car card and add to cart
+                addToCart(carId, $(`.add-to-cart[data-car-id="${carId}"]`).closest('.col-md-4'));
+            });
+        }
+        
+        // Utility functions
+        function getCarBadge(car) {
+            if (car.fuel_type === 'Electric') return 'Electric';
+            if (car.horsepower > 500) return 'Performance';
+            if (car.type === 'SUV') return 'Family SUV';
+            return 'Premium';
+        }
+        
+        function getFuelEfficiency(car) {
+            if (car.fuel_type === 'Electric') {
+                return `${car.mileage || '396'} Miles Range`;
+            }
+            return '15/21 MPG'; // Default for demo
+        }
+        
+        function getCarDescription(car) {
+            return `The ${car.make} ${car.model} is a premium ${car.type.toLowerCase()} that combines luxury with performance. With its ${car.horsepower} horsepower engine and advanced features, it offers an exceptional driving experience.`;
+        }
+        
+        function showApiError(message) {
+            $('#apiErrorText').text(message);
+            $('#apiErrorAlert').removeClass('d-none');
+        }
+    </script>
+</body>
+</html>
