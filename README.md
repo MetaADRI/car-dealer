@@ -1,340 +1,332 @@
-# AutoElite Car Dealership - Full Stack Website
+# 🎯 MetaADRI - Complete Portfolio Hub
 
-A modern, responsive car dealership website with a Python Flask backend and MySQL database.
-
-![AutoElite](https://img.shields.io/badge/AutoElite-Car%20Dealership-blue)
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
-![Flask](https://img.shields.io/badge/Flask-2.3.3-green)
-![MySQL](https://img.shields.io/badge/MySQL-XAMPP-orange)
-
-## Table of Contents
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Installation Guide](#installation-guide)
-- [Database Setup](#database-setup)
-- [Running the Application](#running-the-application)
-- [Project Structure](#project-structure)
-- [API Endpoints](#api-endpoints)
-- [Testing](#testing)
-- [Troubleshooting](#troubleshooting)
-- [Support](#support)
-
-## Features
-
-✨ **Frontend Features:**
-- Responsive design with Bootstrap 5
-- Modern UI with smooth animations
-- jQuery for interactive elements
-- Shopping cart functionality
-- User registration and authentication
-- Car inventory with filtering
-- Mobile-friendly design
-
-🔧 **Backend Features:**
-- Python Flask RESTful API
-- MySQL database with XAMPP
-- JWT-based authentication
-- User session management
-- Secure password hashing
-- CORS enabled for frontend communication
-
-## Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-### 1. XAMPP
-Download and install XAMPP from [https://www.apachefriends.org](https://www.apachefriends.org)
-- Includes Apache web server and MySQL database
-- Available for Windows, macOS, and Linux
-
-### 2. Python 3.8+
-Download and install Python from [https://www.python.org/downloads](https://www.python.org/downloads)
-- **Important**: During installation, check "Add Python to PATH"
-- Verify installation by running `python --version` in command prompt
-
-### 3. Git (Optional)
-For cloning the repository from [https://git-scm.com](https://git-scm.com)
-
-## Installation Guide
-
-### Step 1: Get the Project Files
-```bash
-# Option 1: Clone with Git
-git clone <repository-url>
-cd car-dealership
-
-# Option 2: Download ZIP
-# Download and extract the project files to a folder called 'car-dealership'
-```
-
-### Step 2: Set Up Python Virtual Environment
-```bash
-# Navigate to project directory
-cd car-dealership
-
-# Create virtual environment
-python -m venv venv
-
-# Activate virtual environment
-# Windows:
-venv\Scripts\activate
-# macOS/Linux:
-source venv/bin/activate
-
-# Your command prompt should now show (venv)
-```
-
-### Step 3: Install Python Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-**If requirements.txt is missing, install manually:**
-```bash
-pip install Flask==2.3.3
-pip install Flask-MySQLdb==1.0.1
-pip install Flask-CORS==4.0.0
-pip install Werkzeug==2.3.7
-pip install python-dotenv==1.0.0
-pip install bcrypt==4.0.1
-pip install PyJWT==2.8.0
-```
-
-## Database Setup
-
-### Step 1: Start XAMPP Services
-1. Open XAMPP Control Panel
-2. Click "Start" next to **Apache** and **MySQL**
-3. Both should show green "Running" status
-4. Leave XAMPP running in the background
-
-### Step 2: Create Database
-1. Open your web browser
-2. Go to: `http://localhost/phpmyadmin`
-3. Click "New" in the left sidebar
-4. Enter database name: `car_dealership`
-5. Click "Create"
-
-### Step 3: Verify Database Connection
-The Flask application will automatically create all necessary tables when it runs for the first time.
-
-## Running the Application
-
-### Step 1: Start Backend Server
-```bash
-# Make sure you're in the project directory and virtual environment is activated
-cd backend
-python app.py
-```
-
-**Expected Output:**
-```
-* Serving Flask app 'app'
-* Debug mode: on
-* Running on http://127.0.0.1:5000
-Press CTRL+C to quit
-* Restarting with stat
-* Debugger is active!
-* Debugger PIN: XXX-XXX-XXX
-```
-
-### Step 2: Access the Website
-Open your web browser and navigate to:
-```
-http://localhost:5000
-```
-
-## Project Structure
-
-```
-car-dealership/
-├── frontend/                 # All HTML files
-│   ├── index.html           # Homepage with hero section
-│   ├── about.html           # About Us page
-│   ├── cars.html            # Car inventory with filtering
-│   └── create-account.html  # User registration form
-├── backend/                 # Python Flask application
-│   ├── app.py              # Main Flask application
-│   ├── config.py           # Database configuration
-│   ├── models.py           # Database models & setup
-│   ├── auth.py             # Authentication routes
-│   ├── cars.py             # Car inventory API
-│   ├── cart.py             # Shopping cart API
-│   └── utils.py            # Helper functions
-├── requirements.txt         # Python dependencies
-└── README.md               # This file
-```
-
-## API Endpoints
-
-### 🔐 Authentication
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| POST | `/api/auth/register` | User registration | No |
-| POST | `/api/auth/login` | User login | No |
-| POST | `/api/auth/verify` | Verify JWT token | Yes |
-
-### 🚗 Cars
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/api/cars` | Get all cars (filterable) | No |
-| GET | `/api/cars/<id>` | Get specific car details | No |
-
-### 🛒 Shopping Cart
-| Method | Endpoint | Description | Auth Required |
-|--------|----------|-------------|---------------|
-| GET | `/api/cart` | Get user's cart | Yes |
-| POST | `/api/cart/add/<car_id>` | Add car to cart | Yes |
-| DELETE | `/api/cart/remove/<car_id>` | Remove car from cart | Yes |
-
-### 🩺 Health Check
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/health` | API status check |
-
-## Testing
-
-### 1. API Health Check
-Open in browser: `http://localhost:5000/api/health`
-
-**Expected Response:**
-```json
-{
-  "status": "healthy",
-  "message": "Car Dealership API is running"
-}
-```
-
-### 2. Test Car Inventory
-Open in browser: `http://localhost:5000/api/cars`
-
-**Expected Response:** JSON array of car objects
-
-### 3. Test Website Functionality
-1. **Homepage**: `http://localhost:5000` - Should show featured cars
-2. **Registration**: `http://localhost:5000/create-account.html` - Create a user account
-3. **Car Inventory**: `http://localhost:5000/cars.html` - Browse and filter cars
-4. **Shopping Cart**: Add cars to cart (requires login)
-
-## Troubleshooting
-
-### 🔴 Common Issues and Solutions
-
-#### 1. "MySQL Connection Error"
-**Problem**: Cannot connect to MySQL database
-**Solution**:
-- Ensure XAMPP MySQL is running
-- Check if port 3306 is available
-- Verify database exists: `car_dealership`
-
-#### 2. "Module Not Found"
-**Problem**: Python modules not found
-**Solution**:
-```bash
-# Reactivate virtual environment
-venv\Scripts\activate  # Windows
-source venv/bin/activate  # macOS/Linux
-
-# Reinstall requirements
-pip install -r requirements.txt
-```
-
-#### 3. "Port 5000 Already in Use"
-**Solution**:
-```bash
-# Change port in backend/app.py
-app.run(debug=True, port=5001)
-
-# Or kill existing process
-# Windows:
-netstat -ano | findstr :5000
-taskkill /PID <PID> /F
-# macOS/Linux:
-lsof -ti:5000 | xargs kill -9
-```
-
-#### 4. "CORS Errors"
-**Problem**: Cross-Origin Request Blocked
-**Solution**:
-- Ensure accessing via `http://localhost:5000`
-- Flask CORS is already configured
-
-#### 5. "Tables Not Created"
-**Solution**: Manual table creation in phpMyAdmin:
-```sql
-CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(80) UNIQUE NOT NULL,
-    email VARCHAR(120) UNIQUE NOT NULL,
-    password_hash VARCHAR(255) NOT NULL,
-    first_name VARCHAR(100) NOT NULL,
-    last_name VARCHAR(100) NOT NULL,
-    phone VARCHAR(20),
-    address TEXT,
-    date_of_birth DATE,
-    security_question VARCHAR(255),
-    security_answer VARCHAR(255),
-    preferences JSON,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE cars (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    make VARCHAR(50) NOT NULL,
-    model VARCHAR(50) NOT NULL,
-    year INT NOT NULL,
-    price DECIMAL(10,2) NOT NULL,
-    type VARCHAR(50) NOT NULL,
-    horsepower INT,
-    transmission VARCHAR(50),
-    fuel_type VARCHAR(50),
-    mileage INT,
-    seats INT,
-    features TEXT,
-    image_url VARCHAR(255),
-    is_available BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE cart_items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    car_id INT NOT NULL,
-    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (car_id) REFERENCES cars(id),
-    UNIQUE KEY unique_user_car (user_id, car_id)
-);
-```
-
-### 🟡 Debugging Steps
-
-1. **Check Flask Console** for Python errors
-2. **Browser Developer Tools** (F12) for JavaScript errors
-3. **Network Tab** in Developer Tools for API calls
-4. **Verify XAMPP** services are running
-5. **Check Database** in phpMyAdmin
-
-## Support
-
-If you encounter issues:
-
-1. **Check the troubleshooting section above**
-2. **Verify all prerequisites are installed**
-3. **Ensure all services are running** (XAMPP, Flask)
-4. **Check console outputs** for error messages
-
-### Quick Start Checklist
-- [ ] XAMPP installed and running
-- [ ] Python 3.8+ installed
-- [ ] Virtual environment created and activated
-- [ ] Dependencies installed
-- [ ] Database created in phpMyAdmin
-- [ ] Flask server running on port 5000
-- [ ] Website accessible at `http://localhost:5000`
+Welcome to my **complete professional portfolio**. I'm a **Cybersecurity & Full-Stack Developer** with IT Support expertise, building secure and scalable applications.
 
 ---
 
-**Happy Coding!** 🚗💨
+## 👋 About Me
 
-If everything is set up correctly, you should have a fully functional car dealership website running locally with user registration, car inventory, and shopping cart functionality.
+I'm **MetaADRI**, a passionate developer and cybersecurity enthusiast from Zambia. I specialize in:
+
+- 🛡️ **Cybersecurity** - Security audits, threat detection, incident response
+- 💻 **Full-Stack Development** - Building end-to-end applications
+- 🚀 **System Architecture** - Designing scalable solutions
+- 📱 **Responsive Design** - Mobile-first web development
+
+**Background**: Customer Support & IT Help Desk professional transitioning into cybersecurity and software development, pursuing global tech roles.
+
+---
+
+## 🚀 Featured Projects
+
+### 1. 🔗 **[MobiLink](https://github.com/MetaADRI/MobiLink)** - Intercity Mobility MVP
+**Status**: Active | **Live**: [mobi-link-iivv.vercel.app](https://mobi-link-iivv.vercel.app)
+
+A modern mobility and parcel logistics platform for Zambia.
+
+**Tech Stack**: React, Vite, TypeScript, Node.js, Express, PostgreSQL, Prisma
+
+**Key Features**:
+- Real-time trip booking & tracking
+- Parcel delivery management
+- Payment integration
+- Rating & review system
+- Mobile-responsive design
+
+**[→ View Full Portfolio](https://github.com/MetaADRI/MobiLink/blob/portfolio-page/PORTFOLIO.md)**
+
+---
+
+### 2. 🔐 **[SecureAuth](https://github.com/MetaADRI/SecureAuth)** - Enterprise 2FA Solution
+**Status**: Production Ready | **Live**: [secure-auth-seven.vercel.app](https://secure-auth-seven.vercel.app)
+
+Military-grade Two-Factor Authentication with DDoS protection.
+
+**Tech Stack**: Node.js, Express, JWT, DDoS Protection, Bcrypt
+
+**Key Features**:
+- Email/Password authentication
+- TOTP 2FA with QR codes
+- Backup codes for recovery
+- Session management
+- Rate limiting & brute force protection
+- Audit logging
+
+**[→ View Full Portfolio](https://github.com/MetaADRI/SecureAuth/blob/portfolio-page/PORTFOLIO.md)**
+
+---
+
+### 3. 🔍 **[Cybersecurity Portfolio](https://github.com/MetaADRI/cybersecurity-portfolio)** - Security Analysis Tools
+**Status**: Active Learning | **Type**: Python Security Tools
+
+Comprehensive security toolkit demonstrating hands-on expertise.
+
+**Tech Stack**: Python 3, Scapy, Regex, CSV Processing
+
+**Tools Included**:
+- 🔐 Security Audit Tool - System vulnerability assessment
+- 📡 Network Traffic Analysis - Packet inspection & monitoring
+- 📋 Incident Response Journal - Threat tracking & documentation
+- 📊 Log File Analyzer - Regex-based threat detection with CSV reports
+
+**Key Features**:
+- File permission analysis
+- Network protocol identification
+- Suspicious traffic detection
+- Incident logging & timeline
+- Threat pattern matching
+
+**[→ View Full Portfolio](https://github.com/MetaADRI/cybersecurity-portfolio/blob/portfolio-page/PORTFOLIO.md)**
+
+---
+
+### 4. 🚗 **[Car Dealership Platform](https://github.com/MetaADRI/car-dealer)** - Full-Stack E-Commerce
+**Status**: Production Ready | **Type**: Flask Backend + HTML/CSS/JS Frontend
+
+Complete car dealership website with inventory, cart, and orders.
+
+**Tech Stack**: Python Flask, MySQL, JWT, HTML5, CSS3, JavaScript
+
+**Key Features**:
+- User registration & authentication
+- Car inventory management
+- Advanced filtering & search
+- Shopping cart & checkout
+- Order history tracking
+- Admin dashboard
+- Responsive design
+
+**[→ View Full Portfolio](https://github.com/MetaADRI/car-dealer/blob/master/PORTFOLIO.md)**
+
+---
+
+### 5. 📅 **[Cavendish Appointment System](https://github.com/MetaADRI/cavendish-appointment-system)** - Real-Time Booking
+**Status**: Production Ready | **Type**: Real-Time Appointment Management
+
+University appointment booking system with real-time updates.
+
+**Tech Stack**: Node.js, Express, MySQL, Socket.IO, JWT
+
+**Key Features**:
+- Student registration & appointment booking
+- Real-time status tracking
+- Automatic SMS/Email reminders
+- Official availability management
+- Admin analytics dashboard
+- Feedback & rating system
+
+**[→ View Full Portfolio](https://github.com/MetaADRI/cavendish-appointment-system/blob/master/PORTFOLIO.md)**
+
+---
+
+### 6. ✈️ **[CavAirlines](https://github.com/MetaADRI/CavAirlines)** - Frontend Practice Project
+**Status**: Learning Project | **Type**: Responsive Web Design
+
+Modern airlines website demonstrating frontend excellence.
+
+**Tech Stack**: HTML5, CSS3, Vanilla JavaScript (ES6+)
+
+**Key Features**:
+- Responsive design (mobile-first)
+- Flight search & filtering
+- Booking form with validation
+- Smooth animations & transitions
+- Interactive components
+- Accessibility-focused
+- No framework dependencies
+
+**Lighthouse Scores**: Performance: 92/100 | Accessibility: 88/100 | SEO: 95/100
+
+**[→ View Full Portfolio](https://github.com/MetaADRI/CavAirlines/blob/master/PORTFOLIO.md)**
+
+---
+
+## 🛡️ Skills & Expertise
+
+### 🔐 Cybersecurity
+- Security Audits & Penetration Testing
+- Network Traffic Analysis
+- Log File Analysis & Threat Detection
+- Incident Response & Handling
+- 2FA & Authentication Systems
+- DDoS Protection Mechanisms
+- Vulnerability Assessment
+
+### 💻 Backend Development
+- Python (Flask framework)
+- Node.js & Express.js
+- RESTful API Design
+- JWT Authentication
+- Database Design (MySQL, PostgreSQL)
+- ORM Technologies (SQLAlchemy, Sequelize, Prisma)
+- Microservices Architecture
+
+### 🎨 Frontend Development
+- React & Vite
+- TypeScript
+- HTML5 & CSS3 (Flexbox, Grid)
+- JavaScript (ES6+)
+- Responsive Design (Mobile-First)
+- UI/UX Implementation
+- Web Accessibility (WCAG)
+
+### 🗄️ Databases & Tools
+- MySQL & PostgreSQL
+- Database Optimization & Indexing
+- Git & GitHub
+- Docker & Containerization
+- System Administration
+- Technical Troubleshooting
+- CRM Systems & Remote Support
+
+### 🔧 Additional Skills
+- Real-time Applications (Socket.IO)
+- Payment Integration
+- Email & SMS Services
+- File Upload Management
+- Data Visualization
+- Performance Optimization
+- CI/CD Pipelines
+
+---
+
+## 📊 Project Statistics
+
+| Project | Type | Status | Tech | GitHub |
+|---------|------|--------|------|--------|
+| **MobiLink** | MVP | ✅ Active | React, Node.js | [Repo](https://github.com/MetaADRI/MobiLink) |
+| **SecureAuth** | Security | ✅ Production | Node.js, JWT | [Repo](https://github.com/MetaADRI/SecureAuth) |
+| **Cybersecurity Portfolio** | Tools | ✅ Active | Python | [Repo](https://github.com/MetaADRI/cybersecurity-portfolio) |
+| **Car Dealership** | E-Commerce | ✅ Production | Flask, MySQL | [Repo](https://github.com/MetaADRI/car-dealer) |
+| **Cavendish Appointments** | Real-Time | ✅ Production | Node.js, Express | [Repo](https://github.com/MetaADRI/cavendish-appointment-system) |
+| **CavAirlines** | Frontend | ✅ Learning | HTML, CSS, JS | [Repo](https://github.com/MetaADRI/CavAirlines) |
+
+**Total Lines of Code**: 50,000+  
+**Projects Completed**: 8+  
+**Languages**: 8 (Python, JavaScript, TypeScript, HTML, CSS, SQL, Bash, Docker)
+
+---
+
+## 🎓 Learning Journey
+
+### Certifications & Training
+- 🎓 **Software Engineering** - PowerLearn Project
+- 🎓 **Web Technologies** - HTML, CSS, JavaScript, Backend
+- 🎓 **Database Design** - SQL & Database Architecture
+- 🎓 **Cybersecurity** - Self-taught through practical projects
+
+### Key Learnings
+1. **Full-Stack Architecture** - End-to-end application development
+2. **Security First** - Building secure applications by default
+3. **Real-Time Systems** - WebSocket implementation & management
+4. **Scalable Design** - Database optimization & indexing strategies
+5. **Responsive Development** - Mobile-first design principles
+6. **DevOps Basics** - Docker, deployment, CI/CD
+7. **Incident Response** - Security threat handling
+
+---
+
+## 💼 Professional Background
+
+### Experience
+- **IT Support & Customer Service** - CRM systems, remote troubleshooting, user support
+- **System Administration** - User management, network basics
+- **Technical Documentation** - Clear code comments, README files
+
+### Why This Background Matters
+✅ **Problem-Solving** - Diagnosed issues from user perspective  
+✅ **Communication** - Can explain technical concepts clearly  
+✅ **User Focus** - Build apps with real user needs in mind  
+✅ **System Thinking** - Understand how parts connect  
+
+---
+
+## 🔗 Connect & Explore
+
+### View All Projects
+- 🔗 **GitHub**: [@MetaADRI](https://github.com/MetaADRI)
+- 📊 **GitHub Stats**: [See Profile](https://github.com/MetaADRI)
+
+### Individual Portfolio Pages
+Each project has a detailed `PORTFOLIO.md` file with:
+- 📋 Complete feature documentation
+- 🛠️ Technology stack details
+- 📚 API documentation
+- 🗄️ Database schemas
+- 🔐 Security implementation
+- 🧪 Testing approach
+- 📈 Performance metrics
+- 🐛 Known issues & roadmap
+
+---
+
+## 🎯 Current Focus
+
+- 🔐 **Deepening cybersecurity expertise** - Advanced threat detection & prevention
+- 🚀 **Production-ready applications** - Scalable, secure, performant code
+- 🌍 **Global tech roles** - Seeking international opportunities
+- 📚 **Continuous learning** - New technologies & best practices
+
+---
+
+## 🚀 What's Next
+
+### Short-term (Next 3 months)
+- ✅ Complete cybersecurity certification
+- ✅ Build API documentation tools
+- ✅ Contribute to open-source projects
+- ✅ Create technical blog posts
+
+### Long-term (Next 12 months)
+- 🎯 Lead a tech team
+- 🎯 Build SaaS platform
+- 🎯 Establish security consulting services
+- 🎯 Mentor junior developers
+
+---
+
+## 📞 Get In Touch
+
+I'm always open to:
+- 💬 Interesting project opportunities
+- 🤝 Collaboration & partnerships
+- 📚 Knowledge sharing & discussions
+- 🌐 Global tech networking
+
+**Email**: [contact@metaadri.dev](mailto:contact@metaadri.dev)  
+**GitHub**: [@MetaADRI](https://github.com/MetaADRI)  
+**LinkedIn**: [Coming Soon]
+
+---
+
+## 🎓 Quick Facts
+
+- 🌍 **Location**: Zambia
+- 💻 **Coding Since**: 2024
+- 🏆 **Projects Completed**: 8+
+- 📚 **Languages Known**: 8
+- ⭐ **GitHub Stars**: Growing
+- 🎯 **Current Goal**: International tech role
+- 🚀 **Passion**: Building secure, scalable tech solutions
+
+---
+
+## 📜 License
+
+All projects are open source under MIT License unless otherwise specified.
+
+---
+
+## 🙏 Acknowledgments
+
+Thanks to:
+- PowerLearn Project for software engineering training
+- Open-source community for amazing tools & libraries
+- Mentors & collaborators for guidance & feedback
+- Everyone who's used or contributed to my projects
+
+---
+
+**Built with ❤️ and 💻 | Last Updated: June 2026**
+
+*"Building secure, scalable solutions that make a difference."*
