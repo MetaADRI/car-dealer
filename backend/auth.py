@@ -80,14 +80,15 @@ def login():
     try:
         data = request.get_json()
         
-        if not data.get('username') or not data.get('password'):
-            return jsonify({'error': 'Username and password are required'}), 400
+        login_id = data.get('username') or data.get('email')
+        if not login_id or not data.get('password'):
+            return jsonify({'error': 'Username/email and password are required'}), 400
         
         cursor = mysql.connection.cursor()
         cursor.execute('''
             SELECT id, username, email, password_hash, first_name, last_name 
-            FROM users WHERE username = %s
-        ''', (data['username'],))
+            FROM users WHERE username = %s OR email = %s
+        ''', (login_id, login_id))
         
         user = cursor.fetchone()
         cursor.close()
