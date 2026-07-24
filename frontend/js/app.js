@@ -4,7 +4,7 @@
 
 const API_BASE_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:5000/api'
-    : 'https://autoelite-api.onrender.com/api';
+    : 'https://car-dealer-53py.onrender.com/api';
 
 /* ---------- Page Loader ---------- */
 window.addEventListener('load', function() {
